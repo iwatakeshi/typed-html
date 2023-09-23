@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/nicojs/typed-html.svg?branch=master)](https://travis-ci.org/nicojs/typed-html)
-
 # Typed HTML
 
 HTML templates have never been this easy. Type safe using plain TypeScript with a minimal runtime footprint.
@@ -27,7 +25,7 @@ console.log(ul);
 console.log(button);
 ```
 
-Prints: 
+Prints:
 
 ```html
 <ul>
@@ -128,7 +126,7 @@ function listItem(n: number) {
 
 #### Using a helper template like an element
 
-Want a helper component? Create a function that implements CustomElementHandler and you can call it like an HTML element. 
+Want a helper component? Create a function that implements CustomElementHandler and you can call it like an HTML element.
 
 ```typescript
 import {Attributes, CustomElementHandler} from "typed-html"
@@ -136,14 +134,14 @@ import {Attributes, CustomElementHandler} from "typed-html"
 function Button(attributes: Attributes | undefined, contents: string[]) {
     return <div><button type="button" class="original-class" {...attributes}>{contents}</button></div>;
 }
-// Or 
+// Or
 const Button: CustomElementHandler = (attributes, contents) => <div><button type="button" class="original-class" {...attributes}>{contents}</button></div>;
 }
-    
+
 console.log(<Button style="color:#f00">Button Text</Button>);
 ```
 
-Prints: 
+Prints:
 
 ```html
 <div>
@@ -205,7 +203,7 @@ Missing an element or attribute? Please create an issue or a PR to add it. It's 
 
 ```typescript
 const img = <img href="/foo/bar.png">; // => Error! JSX element 'img' has no corresponding closing tag.
-``` 
+```
 
 In the example above, closing the image tag is required for valid TSX code:
 
@@ -220,7 +218,7 @@ See [this code](https://github.com/nicojs/typed-html/blob/master/src/elements.ts
 All HTML attributes support a string value, however some attributes also support a [`number`](https://www.w3.org/TR/html51/infrastructure.html#numbers), [`Date`](https://www.w3.org/TR/html51/infrastructure.html#dates-and-times) or [`boolean`](https://www.w3.org/TR/html51/infrastructure.html#sec-boolean-attributes)(or absent value) type:
 
 ```typescript
-<meter value={1} min={0} max={5} low={1} high={4} optimum={3}></meter>; 
+<meter value={1} min={0} max={5} low={1} high={4} optimum={3}></meter>;
 // => <meter value="1" min="0" max="5" low="1" high="4" optimum="3"></meter>
 <ol start={3}></ol>;
 <progress value={3} max={4}></progress>;
@@ -228,13 +226,13 @@ All HTML attributes support a string value, however some attributes also support
 <th colspan={3} rowspan={3}></th>;
 
 const date = new Date('1914-12-20T08:00');
-<time datetime={date}></time>; 
+<time datetime={date}></time>;
 // => <time datetime="1914-12-20T08:00:00.000Z"></time>
 <ins datetime={date}>updated</ins>;
 <del datetime={date}>old</del>;
 
 // => <form> <input type="checkbox" checked> </form>
-<form novalidate={false}> 
+<form novalidate={false}>
     <input type="checkbox" checked disabled={false}></input>
 </form>
 ```
@@ -274,7 +272,7 @@ This prints:
 
 ### Custom attributes
 
-Custom attribute names are already supported out-of-the-box for attributes with a dash (`-`) in the name. For example: 
+Custom attribute names are already supported out-of-the-box for attributes with a dash (`-`) in the name. For example:
 
 ```typescript
 <button data-menu-item="3"></button>
@@ -294,7 +292,7 @@ Becomes
 
 ```html
 <custom-element a-custom-attr="value"></custom-element>
-``` 
+```
 
 ## How this all works
 
@@ -311,8 +309,8 @@ This:
 Compiles to:
 
 ```javascript
-elements.createElement("ol", { start: 2 }, [1, 2].map(function (li) { 
-    return elements.createElement("li", null, li); 
+elements.createElement("ol", { start: 2 }, [1, 2].map(function (li) {
+    return elements.createElement("li", null, li);
 }));
 ```
 
